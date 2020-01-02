@@ -17,13 +17,12 @@
          </div>
          <div class="settings-menu">
 
-           <div class="menu-style">hfhgf</div>
+          <a href="#!/login" class="btn btn-primary menu-style">Logout</a>
          </div>
        </div>
 <div class="col-md-10 ">
 <h1>Hi {{vm.user.firstName}}!</h1>
-<p>You're logged in!!</p>
-<div class="settings" ng-if="vm.user.username == 'admin'">
+<!-- <div class="settings" ng-if="vm.user.username == 'admin'">
   <h3>All registered users:</h3>
   <ul>
     <li ng-repeat="user in vm.allUsers">
@@ -31,12 +30,45 @@
       - <a ng-click="vm.deleteUser(user.id)">Delete</a>
     </li>
   </ul>
-</div>
+</div> -->
 {{storage.all_orders}}
+
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Статус</th>
+                <th>Створено</th>
+                <th>Тип виробу</th>
+                <th>Бренд</th>
+                <th>Модель</th>
+                <th>Несправність</th>
+                  <th>Терміново</th>
+                <th>Клієнт</th>
+                <th>Коментар</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in storage.all_orders track by $index">
+                <td >1</td>
+                <td>На діагностиці</td>
+                <td>storage.all_orders.created</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+                <td>2011/01/25</td>
+                  <td>System Architect</td>
+                <td>$112,000</td>
+                <td>$112,000</td>
+            </tr>
+        </tbody>
+
+    </table>
+
 <a ng-click="new_order=!new_order" class="btn btn-primary">Замовлення</a>
 
 <p>&nbsp;</p>
-<p><a href="#!/login" class="btn btn-primary">Logout</a></p>
+
 
 <div class="modal" ng-hide="!new_order">
   <h1>Клієнт</h1>

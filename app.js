@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
     var storage = window.localStorage;
@@ -52,6 +53,7 @@
         });
     }
     app.controller('global', function($scope) {
+
       $scope.storage  = storage;
       $scope.check_stor = function() {
    storage.getItem('all_orders')?$scope.all_orders=JSON.parse(storage.getItem('all_orders')):$scope.all_orders = new Array();
@@ -76,6 +78,7 @@ console.log($scope.all_orders);
         cost:$scope.all_orders.cost,
         terminivo:$scope.all_orders.terminivo,
         prepay:$scope.all_orders.prepay,
+        created:new Date(),
       }
       );
       refresh_stor($scope.all_orders);
@@ -88,4 +91,10 @@ console.log($scope.all_orders);
 function refresh_stor(a) {
    storage.setItem('all_orders', JSON.stringify(a));
  }
+ $(document).ready(function() {
+   setTimeout(()=>{
+     $('#example').DataTable();
+
+   },100)
+ } );
 })();
