@@ -1,7 +1,11 @@
 (function () {
     'use strict';
-
-    angular
+    var storage = window.localStorage;
+  // storage.removeItem() // Pass a key name to remove that key from storage.
+  // storage.setItem('key',val );
+  // storage.setItem('passlvl',16);
+  console.log(storage);
+  var app =  angular
         .module('app', ['ngRoute', 'ngCookies'])
         .config(config)
         .run(run);
@@ -47,5 +51,41 @@
             }
         });
     }
-
+    app.controller('global', function($scope) {
+      $scope.storage  = storage;
+      $scope.check_stor = function() {
+   storage.getItem('all_orders')?$scope.all_orders=JSON.parse(storage.getItem('all_orders')):$scope.all_orders = new Array();
+   window.all_orders = $scope.all_orders;
+   console.log($scope.all_orders);
+ }
+ $scope.check_stor()
+console.log($scope.all_orders);
+  $scope.addItem = function () {
+      $scope.all_orders.push({
+        client_name:$scope.all_orders.client_name,
+        act:$scope.all_orders.act,
+        phone:$scope.all_orders.phone,
+        type:$scope.all_orders.type,
+        imei:$scope.all_orders.imei,
+        brend:$scope.all_orders.brend,
+        model:$scope.all_orders.model,
+        komplect:$scope.all_orders.komplect,
+        stan: $scope.all_orders.stan,
+        error:$scope.all_orders.error,
+        comment:$scope.all_orders.comment,
+        cost:$scope.all_orders.cost,
+        terminivo:$scope.all_orders.terminivo,
+        prepay:$scope.all_orders.prepay,
+      }
+      );
+      refresh_stor($scope.all_orders);
+  }
+  $scope.removeItem = function (x) {
+      $scope.errortext = "";
+      $scope.orders.splice(x, 1);
+  }
+});
+function refresh_stor(a) {
+   storage.setItem('all_orders', JSON.stringify(a));
+ }
 })();
